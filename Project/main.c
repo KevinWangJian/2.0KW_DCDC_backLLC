@@ -36,6 +36,8 @@
 #include "iwdg.h"
 #include "analogRegulate.h"
 #include "usart.h"
+#include "inputVolDetect.h"
+
 
 CAN_MessageTypeDef canRxMsg;
 
@@ -51,12 +53,15 @@ CAN_MessageTypeDef canRxMsg;
  */
 void main(void)
 {
+    InputSignalValueTypeDef inputVal;
+    
 	systemClockInit_LL();
     systemTimTickInit_LL();
 	ledLightInit_LL();
 	timer1PwmControlInit_LL();
 	canPeripheralInit_LL();
     usartConfig_LL();
+    inputSignalChannelInit_LL();
     
 	enableInterrupts();
     
@@ -69,6 +74,17 @@ void main(void)
 #if (WATCHDOG_ENABLE == 1)
         feedWatchDog_LL();
 #endif
+        inputVal = inputSignalValue_ReadFIFO();
+        
+        if (inputVal == Power_Input12V_Invalid)
+        {
+            inputVal = Input_None;
+        }
+        else if (inputVal == Power_Input12V_Valid)
+        {
+            inputVal = Input_None;
+        }
+        
         if (readCanRxMessageBuffer(&canRxMsg) == 0)
         {
             canSendMessage_LL(&canRxMsg);

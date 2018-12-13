@@ -33,6 +33,7 @@
 #include "canRxFifo.h"
 #include "ledlight.h"
 #include "usart.h"
+#include "inputVolDetect.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -530,7 +531,8 @@ INTERRUPT_HANDLER(TIM6_UPD_OVF_TRG_IRQHandler, 23)
         TIM4_ClearITPendingBit(TIM4_IT_UPDATE);
         timTick_Decrement();
         uwTick_Increment();
-//        ledLightDisplay();
+        ledLightDisplay();
+        inputSignalScan();
     }
     
     exitInterruptIsr_Callback();

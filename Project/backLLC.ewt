@@ -2143,6 +2143,9 @@
         <name>$PROJ_DIR$\..\Users\Inc\clock.h</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Users\Inc\inputVolDetect.h</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Users\Inc\iwdg.h</name>
       </file>
       <file>
@@ -2174,6 +2177,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Src\clock.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Users\Src\inputVolDetect.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Src\iwdg.c</name>
