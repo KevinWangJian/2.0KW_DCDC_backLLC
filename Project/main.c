@@ -37,6 +37,7 @@
 #include "analogRegulate.h"
 #include "usart.h"
 
+CAN_MessageTypeDef canRxMsg;
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -50,9 +51,6 @@
  */
 void main(void)
 {
-    CAN_MessageTypeDef canMsg;
-    int dutyCycle;
-    
 	systemClockInit_LL();
     systemTimTickInit_LL();
 	ledLightInit_LL();
@@ -71,11 +69,10 @@ void main(void)
 #if (WATCHDOG_ENABLE == 1)
         feedWatchDog_LL();
 #endif
-        if (readCanRxMessageBuffer(&canMsg) == 0)
+        if (readCanRxMessageBuffer(&canRxMsg) == 0)
         {
-            canSendMessage_LL(&canMsg);
-            dutyCycle = (int)canMsg.data[0];
-            voltageParaRegulate(dutyCycle);
+            canSendMessage_LL(&canRxMsg);
+            usartSendData_LL(canRxMsg.data[0]);
         }
 	}
 }

@@ -377,6 +377,8 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
   */
 }
 
+extern CAN_MessageTypeDef canRxMsg;
+
 /**
   * @brief  UART1 RX Interrupt routine
   * @param  None
@@ -396,8 +398,9 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
     {
         rxData = usartReceiveData_LL();
         
-        if (rxData == 0x5a){
+        if (rxData == canRxMsg.data[0]){
             ledLightToggle_LL();
+            canRxMsg.data[0] = 0;
         }
     }
     
@@ -527,7 +530,7 @@ INTERRUPT_HANDLER(TIM6_UPD_OVF_TRG_IRQHandler, 23)
         TIM4_ClearITPendingBit(TIM4_IT_UPDATE);
         timTick_Decrement();
         uwTick_Increment();
-        ledLightDisplay();
+//        ledLightDisplay();
     }
     
     exitInterruptIsr_Callback();
