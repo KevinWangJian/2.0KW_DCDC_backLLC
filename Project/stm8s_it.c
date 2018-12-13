@@ -375,9 +375,6 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
-    enterInterruptIsr_Callback(17);
-    
-    exitInterruptIsr_Callback();
 }
 
 /**
@@ -399,7 +396,7 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
     {
         rxData = usartReceiveData_LL();
         
-        if (rxData == 0x0a){
+        if (rxData == 0x5a){
             ledLightToggle_LL();
         }
     }

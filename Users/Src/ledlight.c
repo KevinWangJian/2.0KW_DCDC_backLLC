@@ -10,10 +10,7 @@
   */
 void ledLightInit_LL(void)
 {
-    GPIO_WriteLow(LEDLIGHT_PORT, LEDLIGHT_PIN);
     GPIO_Init(LEDLIGHT_PORT, LEDLIGHT_PIN, GPIO_MODE_OUT_PP_LOW_FAST);
-    
-//    GPIO_Init(GPIOA, GPIO_PIN_5, GPIO_MODE_OUT_PP_HIGH_FAST);
 }
 
 /**

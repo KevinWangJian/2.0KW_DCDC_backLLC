@@ -25,10 +25,10 @@ void usartConfig_LL(void)
 #endif
     
 #if (USART_TX_INT_ENABLE == 1)
-    UART1_ITConfig(UART1_IT_TC, ENABLE);
+    UART1_ITConfig(UART1_IT_TXE, ENABLE);
 #endif
     
-//    UART1_Cmd(ENABLE);
+    UART1_Cmd(ENABLE);
 }
 
 /*

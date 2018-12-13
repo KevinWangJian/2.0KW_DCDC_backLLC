@@ -51,7 +51,7 @@
 void main(void)
 {
     CAN_MessageTypeDef canMsg;
-//    int dutyCycle;
+    int dutyCycle;
     
 	systemClockInit_LL();
     systemTimTickInit_LL();
@@ -71,16 +71,11 @@ void main(void)
 #if (WATCHDOG_ENABLE == 1)
         feedWatchDog_LL();
 #endif
-        usartSendData_LL(0x5a);
-        systemDelayms(20);
-        
         if (readCanRxMessageBuffer(&canMsg) == 0)
         {
             canSendMessage_LL(&canMsg);
-//            dutyCycle = (int)canMsg.data[0];
-//            voltageParaRegulate(dutyCycle);
-            
-            usartSendData_LL(canMsg.data[0]);
+            dutyCycle = (int)canMsg.data[0];
+            voltageParaRegulate(dutyCycle);
         }
 	}
 }
