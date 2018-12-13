@@ -40,6 +40,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static volatile int VectorNumber = -1;
+static volatile uint16_t tempAdcRawData = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -473,6 +474,8 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
   }
 #endif /*STM8S208 or STM8S207 or STM8AF52Ax or STM8AF62Ax */
 
+extern volatile uint8_t FINISH;
+
 #if defined(STM8S207) || defined(STM8S007) || defined(STM8S208) || defined (STM8AF52Ax) || defined (STM8AF62Ax)
 /**
   * @brief  ADC2 interrupt routine.
@@ -485,6 +488,16 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+    enterInterruptIsr_Callback(22);
+    
+    if (ADC2_GetITStatus() != RESET)
+    {
+        tempAdcRawData = ADC2_GetConversionValue();
+        if (FINISH == 0)FINISH = 1;
+        ADC2_ClearITPendingBit();
+    }
+    
+    exitInterruptIsr_Callback();
 }
 #else /*STM8S105, STM8S103 or STM8S903 or STM8AF626x */
 /**

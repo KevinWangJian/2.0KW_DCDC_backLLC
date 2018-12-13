@@ -37,9 +37,12 @@
 #include "analogRegulate.h"
 #include "usart.h"
 #include "inputVolDetect.h"
+#include "adcTemp.h"
 
 
 CAN_MessageTypeDef canRxMsg;
+
+volatile uint8_t FINISH = 0;
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -62,7 +65,7 @@ void main(void)
 	canPeripheralInit_LL();
     usartConfig_LL();
     inputSignalChannelInit_LL();
-    
+    temperatureSensorAdcInit_LL();
 	enableInterrupts();
     
 #if (WATCHDOG_ENABLE == 1)
@@ -89,6 +92,13 @@ void main(void)
         {
             canSendMessage_LL(&canRxMsg);
             usartSendData_LL(canRxMsg.data[0]);
+        }
+        
+        if (FINISH == 1)
+        {
+            FINISH = 0;
+            systemDelayms(500);
+            ADC2_StartConversion();
         }
 	}
 }

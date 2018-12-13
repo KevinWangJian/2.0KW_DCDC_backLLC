@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>3706720825</fileChecksum>
+  <fileChecksum>3816233029</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
@@ -212,6 +212,11 @@
       <file>$PROJ_DIR$\..\Users\Src\inputVolDetect.c</file>
       <file>$PROJ_DIR$\..\Users\Inc\inputVolDetect.h</file>
       <file>$PROJ_DIR$\Debug\Obj\inputVolDetect.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\adcTemp.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\adcTemp.pbi</file>
+      <file>$PROJ_DIR$\..\Users\Inc\adcTemp.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\adcTemp.__cstat.et</file>
+      <file>$PROJ_DIR$\..\Users\Src\adcTemp.c</file>
       <file>$PROJ_DIR$\Debug\Obj\inputVolDetect.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\inputVolDetect.o</file>
     </outputs>
@@ -293,11 +298,11 @@
       <inputs>
         <tool>
           <name>ICCSTM8</name>
-          <file> 11 29 12 37 15 30 31 24 14 25 32 16 10 13 7 18 17 20 4 21 23 3 9 6 184 157 156 175 178 179 151 177 145 204</file>
+          <file> 11 29 12 37 15 30 31 24 14 25 32 16 10 13 7 18 17 20 4 21 23 3 9 6 184 157 156 175 178 179 151 177 145 204 208</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 13 29 177 31 23 175 12 25 20 9 157 179 204 15 24 16 18 3 184 156 178 151 145 30 14 32 10 7 17 4 21 6 37 11</file>
+          <file> 12 10 177 30 21 175 14 17 11 157 179 204 32 7 4 6 37 184 156 178 151 145 208 29 15 31 24 25 16 13 18 20 23 3 9</file>
         </tool>
       </inputs>
     </file>
@@ -343,7 +348,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 144 129 131 143 137 207 120 125 78 68 83 69 58 62 84 64 75 70 60 65 66 59 108 101 87 116 88 105 114 102 126 133 118 119 166 167</file>
+          <file> 144 206 129 131 143 137 212 120 125 78 68 83 69 58 62 84 64 75 70 60 65 66 59 108 101 87 116 88 105 114 102 126 133 118 119 166 167</file>
         </tool>
       </inputs>
     </file>
@@ -989,6 +994,10 @@
           <name>ICCSTM8</name>
           <file> 24 12 29 15 30 31 14 25 32 16 10 13 7 18 17 20 4 21 23 3 9 6 37</file>
         </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 12 16 15 24 18 3 37 31 25 13 20 23 9 29 30 14 32 10 7 17 4 21 6</file>
+        </tool>
       </inputs>
     </file>
     <file>
@@ -1239,7 +1248,7 @@
       <outputs>
         <tool>
           <name>ICCSTM8</name>
-          <file> 207</file>
+          <file> 212</file>
         </tool>
         <tool>
           <name>__cstat</name>
@@ -1247,7 +1256,7 @@
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 206</file>
+          <file> 211</file>
         </tool>
       </outputs>
       <inputs>
@@ -1258,6 +1267,33 @@
         <tool>
           <name>BICOMP</name>
           <file> 12 18 24 3 11 15 16 29 31 25 13 20 23 9 28 30 14 32 10 7 17 4 21 6 37 204 178</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\Users\Src\adcTemp.c</name>
+      <outputs>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 206</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 209</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 207</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 208 11 29 12 37 15 30 31 24 14 25 32 16 10 13 7 18 17 20 4 21 23 3 9 6</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 14 12 17 30 10 21 32 7 4 6 37 11 29 15 31 24 25 16 13 18 20 23 3 9 208</file>
         </tool>
       </inputs>
     </file>

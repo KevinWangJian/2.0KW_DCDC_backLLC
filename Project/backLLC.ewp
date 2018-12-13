@@ -1796,6 +1796,9 @@
     <group>
       <name>inc</name>
       <file>
+        <name>$PROJ_DIR$\..\Users\Inc\adcTemp.h</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Users\Inc\analogRegulate.h</name>
       </file>
       <file>
@@ -1831,6 +1834,9 @@
     </group>
     <group>
       <name>src</name>
+      <file>
+        <name>$PROJ_DIR$\..\Users\Src\adcTemp.c</name>
+      </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Src\analogRegulate.c</name>
       </file>
