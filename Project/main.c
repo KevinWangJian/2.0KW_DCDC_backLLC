@@ -38,6 +38,7 @@
 #include "usart.h"
 #include "inputVolDetect.h"
 #include "adcTemp.h"
+#include "tim2Scan.h"
 
 
 CAN_MessageTypeDef canRxMsg;
@@ -55,7 +56,7 @@ CAN_MessageTypeDef canRxMsg;
 void main(void)
 {
     InputSignalValueTypeDef inputVal;
-    
+
 	systemClockInit_LL();
     systemTimTickInit_LL();
 	ledLightInit_LL();
@@ -64,6 +65,7 @@ void main(void)
     usartConfig_LL();
     inputSignalChannelInit_LL();
     temperatureSensorAdcInit_LL();
+    tim2ScanInit_LL();
 	enableInterrupts();
     
 #if (WATCHDOG_ENABLE == 1)
@@ -88,7 +90,7 @@ void main(void)
         
         if (readCanRxMessageBuffer(&canRxMsg) == 0)
         {
-            canSendMessage_LL(&canRxMsg);
+            writeCanTxMessageBuffer(&canRxMsg);
             usartSendData_LL(canRxMsg.data[0]);
         }
 	}

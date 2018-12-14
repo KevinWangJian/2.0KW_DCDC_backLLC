@@ -9,6 +9,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
    
+void tim2ScanInit_LL(void);
 
    
 #ifdef __cplusplus

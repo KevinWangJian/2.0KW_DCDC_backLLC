@@ -220,6 +220,7 @@
       <file>$PROJ_DIR$\..\Libraries\STM8S_StdPeriph_Driver\src\stm8s_wwdg.c</file>
       <file>$PROJ_DIR$\..\Users\Inc\can.h</file>
       <file>$PROJ_DIR$\..\Users\Inc\tim2Scan.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\tim2Scan.__cstat.et</file>
       <file>$PROJ_DIR$\..\Users\Src\tim2Scan.c</file>
       <file>$PROJ_DIR$\Debug\Obj\tim2Scan.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\tim2Scan.o</file>
@@ -275,11 +276,11 @@
       <inputs>
         <tool>
           <name>ICCSTM8</name>
-          <file> 26 12 24 175 13 28 6 29 25 17 9 30 14 31 32 8 4 15 18 16 20 0 11 19 161 180 159 156 212 186 165 199 177 154 191</file>
+          <file> 26 12 24 175 13 28 6 29 25 17 9 30 14 31 32 8 4 15 18 16 20 0 11 19 161 180 159 156 212 186 165 199 177 154 191 213</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 14 24 199 28 16 156 25 4 180 186 154 9 32 18 19 175 161 159 212 165 177 191 12 13 6 29 17 30 31 8 15 20 0 11 26</file>
+          <file> 30 199 13 156 213 29 8 0 24 180 186 154 12 6 17 31 15 20 11 26 161 159 212 165 177 191 28 25 9 14 32 4 18 16 19 175</file>
         </tool>
       </inputs>
     </file>
@@ -352,7 +353,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 147 137 116 93 143 124 152 119 101 60 87 43 88 81 76 55 69 42 91 82 84 70 67 94 48 44 102 47 95 104 49 122 99 113 96 128 135</file>
+          <file> 147 137 116 93 143 124 152 119 101 60 87 43 88 81 76 55 69 42 91 82 84 70 67 94 48 44 102 47 95 104 49 122 99 217 113 96 128 135</file>
         </tool>
       </inputs>
     </file>
@@ -1306,14 +1307,22 @@
       <outputs>
         <tool>
           <name>ICCSTM8</name>
-          <file> 216</file>
+          <file> 217</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 214</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 215</file>
+          <file> 216</file>
         </tool>
       </outputs>
       <inputs>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 213 26 12 24 175 13 28 6 29 25 17 9 30 14 31 32 8 4 15 18 16 20 0 11 19</file>
+        </tool>
         <tool>
           <name>BICOMP</name>
           <file> 11 17 24 15 12 6 31 20 26 13 29 30 8 0 28 25 9 14 32 4 18 16 19 175 213</file>
@@ -1339,10 +1348,6 @@
     <forcedrebuild>
       <name>$PROJ_DIR$\..\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c</name>
       <tool>ICCSTM8</tool>
-    </forcedrebuild>
-    <forcedrebuild>
-      <name>[MULTI_TOOL]</name>
-      <tool>ILINK</tool>
     </forcedrebuild>
   </configuration>
   <configuration>
