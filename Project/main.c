@@ -43,6 +43,10 @@
 
 CAN_MessageTypeDef canRxMsg;
 
+uint8_t uartSendData[13] = {0x5a,0x5a,0x5a,0x5a,0x5a,
+                            0x5a,0x5a,0x5a,0x5a,0x5a,
+                            0x5a,0x5a,0x5a};
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -55,8 +59,6 @@ CAN_MessageTypeDef canRxMsg;
  */
 void main(void)
 {
-    InputSignalValueTypeDef inputVal;
-
 	systemClockInit_LL();
     systemTimTickInit_LL();
 	ledLightInit_LL();
@@ -77,22 +79,14 @@ void main(void)
 #if (WATCHDOG_ENABLE == 1)
         feedWatchDog_LL();
 #endif
-        inputVal = inputSignalValue_ReadFIFO();
-        
-        if (inputVal == Power_Input12V_Invalid)
-        {
-            inputVal = Input_None;
-        }
-        else if (inputVal == Power_Input12V_Valid)
-        {
-            inputVal = Input_None;
-        }
-        
         if (readCanRxMessageBuffer(&canRxMsg) == 0)
         {
             writeCanTxMessageBuffer(&canRxMsg);
-            usartSendData_LL(canRxMsg.data[0]);
+//            usartSendData_LL(canRxMsg.data[0]);
         }
+        
+        usartSendNBytesData(uartSendData, 13);
+        systemDelayms(50);
 	}
 }
 

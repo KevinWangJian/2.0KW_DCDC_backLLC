@@ -423,6 +423,11 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+    enterInterruptIsr_Callback(17);
+    
+    usartTxIRQ_Callback();
+    
+    exitInterruptIsr_Callback();
 }
 
 extern CAN_MessageTypeDef canRxMsg;
@@ -437,20 +442,22 @@ extern CAN_MessageTypeDef canRxMsg;
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
-    uint8_t rxData;
+//    uint8_t rxData;
     
     enterInterruptIsr_Callback(18);
     
-    if ((UART1_GetITStatus(UART1_IT_RXNE) == SET) || \
-        (UART1_GetITStatus(UART1_IT_OR) == SET))
-    {
-        rxData = usartReceiveData_LL();
-        
-        if (rxData == canRxMsg.data[0]){
-            ledLightToggle_LL();
-            canRxMsg.data[0] = 0;
-        }
-    }
+//    if ((UART1_GetITStatus(UART1_IT_RXNE) == SET) || \
+//        (UART1_GetITStatus(UART1_IT_OR) == SET))
+//    {
+//        rxData = usartReceiveData_LL();
+//        
+//        if (rxData == canRxMsg.data[0]){
+//            ledLightToggle_LL();
+//            canRxMsg.data[0] = 0;
+//        }
+//    }
+    
+    usartRxIRQ_Callback();
     
     exitInterruptIsr_Callback();
 }
