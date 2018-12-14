@@ -2140,7 +2140,7 @@
         <name>$PROJ_DIR$\..\Users\Inc\can.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Users\Inc\canRxFifo.h</name>
+        <name>$PROJ_DIR$\..\Users\Inc\canSoftFifo.h</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Inc\clock.h</name>
@@ -2182,7 +2182,7 @@
         <name>$PROJ_DIR$\..\Users\Src\can.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Users\Src\canRxFifo.c</name>
+        <name>$PROJ_DIR$\..\Users\Src\canSoftFifo.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Src\clock.c</name>

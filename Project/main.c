@@ -32,7 +32,7 @@
 #include "timtick.h"
 #include "tim1PwmCtrl.h"
 #include "can.h"
-#include "canRxFifo.h"
+#include "canSoftFifo.h"
 #include "iwdg.h"
 #include "analogRegulate.h"
 #include "usart.h"

@@ -1,6 +1,6 @@
 
-#ifndef  __CANRXFIFO_H
-#define  __CANRXFIFO_H
+#ifndef  __CANSOFTFIFO_H
+#define  __CANSOFTFIFO_H
 
 #ifdef __cplusplus
  extern "C" {

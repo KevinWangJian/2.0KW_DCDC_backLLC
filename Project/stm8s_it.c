@@ -30,7 +30,7 @@
 #include "main.h"
 #include "timtick.h"
 #include "can.h"
-#include "canRxFifo.h"
+#include "canSoftFifo.h"
 #include "ledlight.h"
 #include "usart.h"
 #include "inputVolDetect.h"
@@ -538,8 +538,6 @@ extern volatile uint8_t FINISH;
     
     if (ADC2_GetITStatus() != RESET)
     {
-//        tempAdcRawData = ADC2_GetConversionValue();
-//        if (FINISH == 0)FINISH = 1;
         ADC2_ClearITPendingBit();
     }
     
