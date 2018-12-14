@@ -39,8 +39,9 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-static volatile int VectorNumber = -1;
-static volatile uint16_t tempAdcRawData = 0;
+static volatile int8_t VectorNumber = -1;
+static volatile uint8_t canTransmitSem_Mutex = 0;
+
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -249,6 +250,30 @@ INTERRUPT_HANDLER(EXTI_PORTE_IRQHandler, 7)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+    enterInterruptIsr_Callback(9);
+    
+    CAN_MessageTypeDef txMsg;
+    
+    if (CAN_GetITStatus(CAN_IT_TME) == SET)
+    {
+        CAN_ClearITPendingBit(CAN_IT_TME);
+        
+        if (canTransmitSem_Mutex == 0xff)               /* 判断CAN报文发送互斥信号量是否置位? */
+        {
+            if (readCanTxMessageBuffer(&txMsg) == 0)    /* 判断软件CAN发送FIFO中是否读取到有效的报文? */
+            {
+                canSendMessage_LL(&txMsg);              /* 有CAN报文,调用底层驱动函数发送. */
+            }
+            else
+            {
+                CAN_ITConfig(CAN_IT_TME, DISABLE);      /* 若软件CAN发送FIFO中没有有效的报文待发送了,则关闭CAN发送邮箱空中断. */
+                
+                canTransmitSem_Mutex = 0;               /* CAN报文发送互斥信号量清零. */
+            }
+        }
+    }
+    
+    exitInterruptIsr_Callback();
 }
 #endif /*STM8S208 || STM8AF52Ax */
 
@@ -323,6 +348,27 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+    enterInterruptIsr_Callback(13);
+    
+    CAN_MessageTypeDef txMsg;
+    
+    if (TIM2_GetITStatus(TIM2_IT_UPDATE) != RESET)
+    {
+        TIM2_ClearITPendingBit(TIM2_IT_UPDATE);
+        
+        if (canTransmitSem_Mutex == 0)
+        {
+            if (readCanTxMessageBuffer(&txMsg) == 0)
+            {
+                canSendMessage_LL(&txMsg);               /* 调用CAN发送底层驱动函数,启动发送. */
+                canTransmitSem_Mutex = 0xff;             /* CAN报文发送互斥信号量置位,与CAN发送中断建立互锁机制,防止当前报文还未发送完毕又再次进入该部分程序启动发送. */
+                
+                CAN_ITConfig(CAN_IT_TME, ENABLE);        /* 打开CAN发送邮箱空中断, 等待发送完成. */
+            }
+        }
+    }
+    
+    exitInterruptIsr_Callback();
 }
 
 /**
@@ -492,8 +538,8 @@ extern volatile uint8_t FINISH;
     
     if (ADC2_GetITStatus() != RESET)
     {
-        tempAdcRawData = ADC2_GetConversionValue();
-        if (FINISH == 0)FINISH = 1;
+//        tempAdcRawData = ADC2_GetConversionValue();
+//        if (FINISH == 0)FINISH = 1;
         ADC2_ClearITPendingBit();
     }
     

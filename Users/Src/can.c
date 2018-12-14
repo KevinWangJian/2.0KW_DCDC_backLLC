@@ -166,7 +166,7 @@ int canSendMessage_LL(CAN_MessageTypeDef* pSmsg)
     
     if (canTxStatus != CAN_TxStatus_NoMailBox)
     {
-#if 1
+#if (CANTX_INT_ENABLE == 0)
        uint32_t tickStart = HAL_GetTick();              /* Get tick */
         
        while (CAN_TransmitStatus((CAN_TransmitMailBox_TypeDef)canTxStatus) != CAN_TxStatus_Ok)

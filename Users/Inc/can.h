@@ -10,7 +10,7 @@
 #include "main.h"
 
 #define  CAN_BAUDRATE       (1000)            /* baudrate = 125kbps/250kbps/500kbps/1000kbps */
-#define  CANTX_INT_ENABLE   (0)
+#define  CANTX_INT_ENABLE   (1)
 #define  CANRX_INT_ENABLE   (1)
    
 typedef enum

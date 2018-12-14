@@ -1826,6 +1826,9 @@
         <name>$PROJ_DIR$\..\Users\Inc\tim1PwmCtrl.h</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Users\Inc\tim2Scan.h</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Users\Inc\timtick.h</name>
       </file>
       <file>
@@ -1863,6 +1866,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Src\tim1PwmCtrl.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Users\Src\tim2Scan.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Src\timtick.c</name>

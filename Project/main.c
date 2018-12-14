@@ -42,8 +42,6 @@
 
 CAN_MessageTypeDef canRxMsg;
 
-volatile uint8_t FINISH = 0;
-
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -92,13 +90,6 @@ void main(void)
         {
             canSendMessage_LL(&canRxMsg);
             usartSendData_LL(canRxMsg.data[0]);
-        }
-        
-        if (FINISH == 1)
-        {
-            FINISH = 0;
-            systemDelayms(500);
-            ADC2_StartConversion();
         }
 	}
 }

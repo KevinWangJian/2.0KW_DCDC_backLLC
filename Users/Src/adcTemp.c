@@ -26,3 +26,4 @@ void temperatureSensorAdcInit_LL(void)
     ADC2_Cmd(ENABLE);
     ADC2_StartConversion();
 }
+
