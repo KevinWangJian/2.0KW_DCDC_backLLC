@@ -85,12 +85,12 @@ uint8_t usartReceiveData_LL(void)
 }
 
 /*
- * @函数功能：串口发送指定长度的数据.
+ * @函数功能：串口通信发送指定长度的数据.
  * @函数参数：pTxData, 待发送的数据存储缓冲区;
  * @函数参数：length, 指定的数据长度;
  * @返回值：无
  */
-void usartSendNBytesData(uint8_t* pTxData, uint16_t length)
+void usartCommSendData(uint8_t* pTxData, uint16_t length)
 {
     uint16_t i;
     volatile uint16_t count;
@@ -160,7 +160,50 @@ void usartSendNBytesData(uint8_t* pTxData, uint16_t length)
 }
 
 /*
- * @函数功能：串口发送中断回调函数
+ * @函数功能：串口接收数据.注意：该函数由用户主程序或用户任务调用.若有接收到数据则返回接收到的数据长度.
+ * @函数参数：pRxData, 接收到的数据暂存缓冲区.
+ * @返回值：!0,返回接收到的数据长度; 0,没有接收到数据;
+ */
+uint8_t usartCommReceiveData(uint8_t* pRxData)
+{
+    uint8_t rxSize = 0;
+    volatile uint16_t rxCnt;
+    USART_ParaTypeDef *pUsartPara = &usartTransmitPara;
+    
+    ENTER_CRITICAL();                                                                   /* 进入临界区.注意：要成对调用. */
+    
+    rxCnt = pUsartPara->rxCount;
+    
+    EXIT_CRITICAL();                                                                    /* 退出临界区.注意：要成对调用. */
+    
+    if (rxCnt != 0)
+    {
+        ENTER_CRITICAL();                                                               /* 进入临界区.注意：要成对调用. */
+        
+        rxSize = pUsartPara->pRxBufArray[pUsartPara->rxReadPtr][0];                     /* 获取每帧数据的总长度. */
+        pUsartPara->pRxBufArray[pUsartPara->rxReadPtr][0] = 0;
+        
+        memcpy(pRxData, &pUsartPara->pRxBufArray[pUsartPara->rxReadPtr][1], rxSize);
+        memset(&pUsartPara->pRxBufArray[pUsartPara->rxReadPtr][1], 0, rxSize);
+        
+        EXIT_CRITICAL();                                                                /* 退出临界区.注意：要成对调用. */
+        
+        pUsartPara->rxReadPtr++;
+        if (pUsartPara->rxReadPtr >= pUsartPara->rxBufferSize)
+        {
+            pUsartPara->rxReadPtr = 0;
+        }
+        
+        ENTER_CRITICAL();
+        if (pUsartPara->rxCount != 0)pUsartPara->rxCount--;
+        EXIT_CRITICAL();
+    }
+    
+    return (rxSize);
+}
+
+/*
+ * @函数功能：串口发送中断回调函数.注意：该回调函数需要在UART1_TX_IRQHandler中断服务程序中调用.
  * @函数参数：无
  * @返回值：无
  */
@@ -215,7 +258,7 @@ void usartTxIRQ_Callback(void)
 }
 
 /*
- * @函数功能：串口接收中断回调函数
+ * @函数功能：串口接收中断回调函数.注意：该回调函数需要在UART1_RX_IRQHandler中断服务程序中调用.
  * @函数参数：无
  * @返回值：无
  */
@@ -230,19 +273,18 @@ void usartRxIRQ_Callback(void)
     {
         rxData = usartReceiveData_LL();
         
-        if (rxData == 0xF1)                 /* 接收到"转义序列"的起始符. */
+        if (rxData == 0xF1)                     /* 接收到"转义序列"的起始符. */
         {
-          /* TODO: post一个"开始接收"信号量,告知应用程序开始接收数据. */
             if (commSemMutex == 0)
             {
                 pUsartPara->pRxBuf[pUsartPara->rxFrameSize++] = rxData;
-                commSemMutex = 1;
+                commSemMutex = 1;               /* post一个"开始接收"信号量,告知接收程序开始接收数据. */
             }
         }
-        else if (rxData == 0xF2)            /* 接收到"转义序列"的结束符. */
+        else if (rxData == 0xF2)                /* 接收到"转义序列"的结束符. */
         {
-          /* TODO: post一个"结束接收"信号量,告知应用程序结束接收数据. */
-            if ((commSemMutex == 1) && (pUsartPara->rxFrameSize >= 5))
+            /* 是接收状态,且接收数据的长度大于等于有效长度. */
+            if ((commSemMutex == 1) && (pUsartPara->rxFrameSize >= USARTCOMM_VALID_FRAME_SIZE))  
             {
                 pUsartPara->pRxBuf[pUsartPara->rxFrameSize++] = rxData;
                 
@@ -262,7 +304,7 @@ void usartRxIRQ_Callback(void)
                 }
                 
                 pUsartPara->rxFrameSize = 0;
-                commSemMutex = 0;
+                commSemMutex = 0;                  /* 释放互斥信号量 */
             }
             else
             {

@@ -5,11 +5,11 @@
 static volatile uint32_t systemTimTick = 0UL;
 static volatile uint32_t uwTick = 0UL;
 
-/**
-  * @brief led light on.
-  * @param None
-  * @retval None
-  */
+/*
+ * @函数功能：系统"滴答"定时器初始化.中断周期:1ms
+ * @函数参数：无
+ * @返回值：无
+ */
 void systemTimTickInit_LL(void)
 {
     CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, ENABLE);
@@ -25,11 +25,11 @@ void systemTimTickInit_LL(void)
     TIM4_Cmd(ENABLE);
 }
 
-/**
-  * @brief led light on.
-  * @param None
-  * @retval None
-  */
+/*
+ * @函数功能：系统Tick计数器全局变量递增.
+ * @函数参数：无
+ * @返回值：无
+ */
 void uwTick_Increment(void)
 {
     uwTick += 1;
@@ -39,21 +39,21 @@ void uwTick_Increment(void)
     }
 }
 
-/**
-  * @brief 
-  * @param 
-  * @retval 
-  */
+/*
+ * @函数功能：获取系统Tick计数器全局变量当前值.
+ * @函数参数：无
+ * @返回值：无
+ */
 uint32_t HAL_GetTick(void)
 {
     return (uwTick);
 }
 
-/**
-  * @brief led light on.
-  * @param None
-  * @retval None
-  */
+/*
+ * @函数功能：判断当前TimTick是否为非0值.若是,递减.
+ * @函数参数：无
+ * @返回值：无
+ */
 void timTick_Decrement(void)
 {
     if (systemTimTick != 0)
@@ -62,11 +62,11 @@ void timTick_Decrement(void)
     }
 }
 
-/**
-  * @brief led light on.
-  * @param None
-  * @retval None
-  */
+/*
+ * @函数功能：系统延时函数.毫秒级
+ * @函数参数：nCount, 延时的时间值.以ms为单位.
+ * @返回值：无
+ */
 void systemDelayms(__IO uint32_t nCount)
 {
     systemTimTick = nCount;

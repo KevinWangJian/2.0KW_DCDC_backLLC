@@ -4,9 +4,9 @@
 #include "timtick.h"
 
 /*
- * @brief  
- * @param  
- * @retval 
+ * @函数功能：CAN硬件外设控制器初始化.注意：通过改变宏定义CAN_BAUDRATE改变CAN控制器通信的波特率.
+ * @函数参数：无
+ * @返回值：无
  */
 void canPeripheralInit_LL(void)
 {
@@ -90,9 +90,9 @@ void canPeripheralInit_LL(void)
 }
 
 /*
- * @brief  
- * @param  
- * @retval 
+ * @函数功能：CAN硬件底层发送报文驱动函数.
+ * @函数参数：pSmsg, 待发送的CAN报文存储缓冲区.
+ * @返回值：0, CAN报文发送成功; -1, CAN报文发送失败;
  */
 int canSendMessage_LL(CAN_MessageTypeDef* pSmsg)
 {
@@ -189,9 +189,9 @@ int canSendMessage_LL(CAN_MessageTypeDef* pSmsg)
 }
 
 /*
- * @brief  
- * @param  
- * @retval 
+ * @函数功能：CAN硬件底层接收报文驱动函数.
+ * @函数参数：pRmsg, 接收到的CAN报文存储缓冲区.
+ * @返回值：0, CAN报文接收成功; -1, CAN报文接收失败;
  */
 int canReceiveMessage_LL(CAN_MessageTypeDef* pRmsg)
 {

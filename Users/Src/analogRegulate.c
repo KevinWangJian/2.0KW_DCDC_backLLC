@@ -4,8 +4,8 @@
 
 
 /*
- * @函数功能：输出电压参数调节,根据要输出的电压值控制PWM占空比输出
- * @函数参数：inputVol, 待输出的电压值
+ * @函数功能：输出电压调节,根据要输出的电压值控制PWM占空比输出
+ * @函数参数：inputVol, 待输出的电压值,取值范围：9~15V.
  * @返回值：无
  */
 void voltageParaRegulate(int inputVol)
@@ -35,8 +35,8 @@ void voltageParaRegulate(int inputVol)
 }
 
 /*
- * @函数功能：输出电流参数调节,根据要输出的电流值控制PWM占空比输出
- * @函数参数：inputCur, 待输出的电流值
+ * @函数功能：输出电流调节,根据要输出的电流值控制PWM占空比输出
+ * @函数参数：inputCur, 待输出的电流值.取值范围：待定.
  * @返回值：无
  */
 void currentParaRegulate(int inputCur)

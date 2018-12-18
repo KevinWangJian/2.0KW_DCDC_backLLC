@@ -3,41 +3,41 @@
 #include "systemStatus.h"
 #include "stm8s_it.h"
 
-/**
-  * @brief led light initial.
-  * @param None
-  * @retval None
-  */
+/*
+ * @函数功能：led灯控制IO口初始化并默认输出熄灭led灯.
+ * @函数参数：无
+ * @返回值：无
+ */
 void ledLightInit_LL(void)
 {
     GPIO_Init(LEDLIGHT_PORT, LEDLIGHT_PIN, GPIO_MODE_OUT_PP_LOW_FAST);
 }
 
-/**
-  * @brief led light on.
-  * @param None
-  * @retval None
-  */
+/*
+ * @函数功能：点亮LED灯.
+ * @函数参数：无
+ * @返回值：无
+ */
 void ledLightOn_LL(void)
 {
     GPIO_WriteHigh(LEDLIGHT_PORT, LEDLIGHT_PIN);
 }
 
-/**
-  * @brief led light off.
-  * @param None
-  * @retval None
-  */
+/*
+ * @函数功能：熄灭led灯.
+ * @函数参数：无
+ * @返回值：无
+ */
 void ledLightOff_LL(void)
 {
     GPIO_WriteLow(LEDLIGHT_PORT, LEDLIGHT_PIN);
 }
 
-/**
-  * @brief led light off.
-  * @param None
-  * @retval None
-  */
+/*
+ * @函数功能：led灯取反.
+ * @函数参数：无
+ * @返回值：无
+ */
 void ledLightToggle_LL(void)
 {
     GPIO_WriteReverse(LEDLIGHT_PORT, LEDLIGHT_PIN);

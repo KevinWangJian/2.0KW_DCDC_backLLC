@@ -9,10 +9,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
    
-   
 void voltageParaRegulate(int inputVol);
 void currentParaRegulate(int inputCur);
-   
    
 #ifdef __cplusplus
 }

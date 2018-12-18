@@ -82,10 +82,9 @@ void main(void)
         if (readCanRxMessageBuffer(&canRxMsg) == 0)
         {
             writeCanTxMessageBuffer(&canRxMsg);
-//            usartSendData_LL(canRxMsg.data[0]);
         }
         
-        usartSendNBytesData(uartSendData, 13);
+        usartCommSendData(uartSendData, 13);
         systemDelayms(50);
 	}
 }

@@ -22,9 +22,9 @@ systemWorkingStatusDef_t getSystemWorkingStatus(void)
  */
 void configSystemWorkingStatus(systemWorkingStatusDef_t data)
 {
-    disableInterrupts();        /* 关闭中断,下面的程序进入临界区 */
+    ENTER_CRITICAL();           /* 进入临界区 */
     sysWorkSta = data;
-    enableInterrupts();         /* 重新开启中断,退出临界区 */
+    EXIT_CRITICAL();            /* 退出临界区 */
 }
 
 

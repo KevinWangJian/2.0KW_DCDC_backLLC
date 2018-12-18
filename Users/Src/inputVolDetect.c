@@ -66,7 +66,7 @@ static volatile uint8_t scanCount = 0;
 
 
 /*
- * @函数功能：判断通道2输入信号是否有效
+* @函数功能：外部双通道输入信号硬件端口初始化为带上拉的输入模式
  * @函数参数：无
  * @返回值：无
  */
@@ -77,8 +77,8 @@ void inputSignalChannelInit_LL(void)
 }
 
 /*
- * @函数功能：判断通道2输入信号是否有效
- * @函数参数：无
+ * @函数功能：往输入信号写缓冲区中载入输入信号值.
+ * @函数参数：data, 输入信号值.
  * @返回值：无
  */
 static void inputSignalValue_WriteFIFO(uint8_t data)
@@ -91,9 +91,9 @@ static void inputSignalValue_WriteFIFO(uint8_t data)
 }
 
 /*
- * @函数功能：判断通道2输入信号是否有效
+ * @函数功能：从缓冲区中读取信号值.
  * @函数参数：无
- * @返回值：无
+ * @返回值：0,无有效信号输入; 其它,输入的信号值.
  */
 InputSignalValueTypeDef inputSignalValue_ReadFIFO(void)
 {
@@ -111,8 +111,8 @@ InputSignalValueTypeDef inputSignalValue_ReadFIFO(void)
 }
 
 /*
- * @函数功能：判断通道2输入信号是否有效
- * @函数参数：无
+ * @函数功能：输入信号检测函数.
+ * @函数参数：idx, 待检测的输入信号通道.
  * @返回值：无
  */
 static void inputSignalDetection(uint8_t idx)
@@ -159,7 +159,7 @@ static void inputSignalDetection(uint8_t idx)
 }
 
 /*
- * @函数功能：判断通道2输入信号是否有效
+ * @函数功能：输入信号扫描检测函数.注意：该函数需要在系统"滴答"中断服务程序中周期调用.
  * @函数参数：无
  * @返回值：无
  */
