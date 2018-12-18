@@ -2140,10 +2140,16 @@
         <name>$PROJ_DIR$\..\Users\Inc\can.h</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Users\Inc\canComm.h</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Users\Inc\canSoftFifo.h</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Inc\clock.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Users\Inc\Crc16.h</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Inc\escf.h</name>
@@ -2185,10 +2191,16 @@
         <name>$PROJ_DIR$\..\Users\Src\can.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Users\Src\canComm.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Users\Src\canSoftFifo.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Src\clock.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Users\Src\Crc16.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Src\escf.c</name>

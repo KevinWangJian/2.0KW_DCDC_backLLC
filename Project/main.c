@@ -39,13 +39,8 @@
 #include "inputVolDetect.h"
 #include "adcTemp.h"
 #include "tim2Scan.h"
-
-
-CAN_MessageTypeDef canRxMsg;
-
-uint8_t uartSendData[13] = {0x5a,0x5a,0x5a,0x5a,0x5a,
-                            0x5a,0x5a,0x5a,0x5a,0x5a,
-                            0x5a,0x5a,0x5a};
+#include "canComm.h"
+    
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -79,13 +74,7 @@ void main(void)
 #if (WATCHDOG_ENABLE == 1)
         feedWatchDog_LL();
 #endif
-        if (readCanRxMessageBuffer(&canRxMsg) == 0)
-        {
-            writeCanTxMessageBuffer(&canRxMsg);
-        }
-        
-        usartCommSendData(uartSendData, 13);
-        systemDelayms(50);
+        canCommReceivedFrameParsing();
 	}
 }
 

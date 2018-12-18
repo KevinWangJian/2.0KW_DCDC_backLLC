@@ -430,8 +430,6 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
     exitInterruptIsr_Callback();
 }
 
-extern CAN_MessageTypeDef canRxMsg;
-
 /**
   * @brief  UART1 RX Interrupt routine
   * @param  None
