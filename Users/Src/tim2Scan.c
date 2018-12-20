@@ -11,7 +11,7 @@ void tim2ScanInit_LL(void)
     CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER2, ENABLE);
     
     TIM2_DeInit();
-    TIM2_TimeBaseInit(TIM2_PRESCALER_128, 125);
+    TIM2_TimeBaseInit(TIM2_PRESCALER_128, (125 - 1));
     TIM2_ARRPreloadConfig(DISABLE);
     TIM2_UpdateDisableConfig(DISABLE);
     TIM2_UpdateRequestConfig(TIM2_UPDATESOURCE_REGULAR);

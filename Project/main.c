@@ -40,12 +40,8 @@
 #include "adcTemp.h"
 #include "tim2Scan.h"
 #include "canComm.h"
-    
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+#include "tim3timeout.h"
+#include "usartComm.h"
 
 /*
  * @函数功能：系统上电启动后的主函数
@@ -63,6 +59,8 @@ void main(void)
     inputSignalChannelInit_LL();
     temperatureSensorAdcInit_LL();
     tim2ScanInit_LL();
+    tim3TimeoutFuncConfig_LL();
+    
 	enableInterrupts();
     
 #if (WATCHDOG_ENABLE == 1)
@@ -75,6 +73,7 @@ void main(void)
         feedWatchDog_LL();
 #endif
         canCommReceivedFrameParsing();
+        usartCommSendCtrlInfo();
 	}
 }
 

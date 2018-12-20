@@ -11,13 +11,14 @@
    
 typedef enum
 {
-    Normal = 1,
-    Fault,
-}systemWorkingStatusDef_t;
+    UsartComm_TimeOut_Error = 0,
+    UsartComm_Data_Error = 1,
+    
+}systemErrorTypeDef_t;
    
 
-systemWorkingStatusDef_t getSystemWorkingStatus(void);
-void configSystemWorkingStatus(systemWorkingStatusDef_t data);
+uint16_t getSystemWorkingStatus(void);
+void configSystemWorkingStatus(uint16_t data);
    
 #ifdef __cplusplus
 }

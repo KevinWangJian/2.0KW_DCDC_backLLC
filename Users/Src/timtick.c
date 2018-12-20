@@ -15,7 +15,7 @@ void systemTimTickInit_LL(void)
     CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, ENABLE);
     
     TIM4_DeInit();
-    TIM4_TimeBaseInit(TIM4_PRESCALER_128, 125);             // 128分频,自动重装载值125. 16MHz/(128*125) = 1KHz
+    TIM4_TimeBaseInit(TIM4_PRESCALER_128, (125 - 1));       // 128分频,自动重装载值125. 16MHz/(128*125) = 1KHz
     TIM4_ARRPreloadConfig(DISABLE);                         // 不使能自动重装载,影子寄存器的值在写入ARR寄存器时立马更新
     TIM4_UpdateDisableConfig(DISABLE);                      // 计数器溢出时产生一个更新事件
     TIM4_UpdateRequestConfig(TIM4_UPDATESOURCE_REGULAR);    // 计数器溢出时立即发送一个中断请求

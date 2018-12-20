@@ -34,7 +34,10 @@
 #include "ledlight.h"
 #include "usart.h"
 #include "inputVolDetect.h"
-
+#include "tim3timeout.h"
+#include "usartComm.h"
+    
+    
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -396,6 +399,17 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+    enterInterruptIsr_Callback(15);
+    
+    if (TIM3_GetITStatus(TIM3_IT_UPDATE) == SET) 
+    {
+        TIM3_ClearITPendingBit(TIM3_IT_UPDATE);
+        
+        tim3TimeoutFunc_Stop_LL();
+        usartCommTimeoutCallback();
+    }
+    
+    exitInterruptIsr_Callback();
 }
 
 /**

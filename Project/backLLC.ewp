@@ -1838,10 +1838,16 @@
         <name>$PROJ_DIR$\..\Users\Inc\tim2Scan.h</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Users\Inc\tim3timeout.h</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Users\Inc\timtick.h</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Inc\usart.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Users\Inc\usartComm.h</name>
       </file>
     </group>
     <group>
@@ -1889,10 +1895,16 @@
         <name>$PROJ_DIR$\..\Users\Src\tim2Scan.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Users\Src\tim3timeout.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Users\Src\timtick.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Users\Src\usart.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Users\Src\usartComm.c</name>
       </file>
     </group>
   </group>

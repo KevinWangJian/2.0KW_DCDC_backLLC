@@ -2,7 +2,7 @@
 #include "systemStatus.h"
 
 
-static systemWorkingStatusDef_t sysWorkSta = Normal;
+static uint16_t systemWorkStatus = 0x0000;
 
 
 /*
@@ -10,9 +10,9 @@ static systemWorkingStatusDef_t sysWorkSta = Normal;
  * @函数参数：无
  * @返回值：系统当前工作状态值
  */
-systemWorkingStatusDef_t getSystemWorkingStatus(void)
+uint16_t getSystemWorkingStatus(void)
 {
-    return (sysWorkSta);
+    return (systemWorkStatus);
 }
 
 /*
@@ -20,10 +20,10 @@ systemWorkingStatusDef_t getSystemWorkingStatus(void)
  * @函数参数：data, 将要设置的系统工作状态值
  * @返回值：无
  */
-void configSystemWorkingStatus(systemWorkingStatusDef_t data)
+void configSystemWorkingStatus(uint16_t data)
 {
     ENTER_CRITICAL();           /* 进入临界区 */
-    sysWorkSta = data;
+    systemWorkStatus = data;
     EXIT_CRITICAL();            /* 退出临界区 */
 }
 

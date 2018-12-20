@@ -10,13 +10,13 @@
 #include "main.h"
    
 #define  USART_RX_INT_ENABLE    (1)             /* 串口接收中断使能 */
-#define  USART_TX_INT_ENABLE    (1)             /* 串口发送中断禁止 */
+#define  USART_TX_INT_ENABLE    (1)             /* 串口发送中断使能 */
    
 #define  USART_TX_BUF_SIZE      (10)
 #define  USART_RX_BUF_SIZE      (10)
 #define  USART_RX_MSG_SIZE      (10)
    
-#define  USARTCOMM_VALID_FRAME_SIZE (5)         /* 串口通信每帧数据的最低有效长度 */
+#define  USARTCOMM_VALID_FRAME_SIZE (4)         /* 串口通信每帧数据的最低有效长度 */
    
    
 typedef struct
