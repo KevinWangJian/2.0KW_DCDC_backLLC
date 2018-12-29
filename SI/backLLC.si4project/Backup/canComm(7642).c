@@ -37,7 +37,7 @@ void canCommReceivedFrameParsing(void)
 				buf[Len++] = START_STOP_MACHINE_CMD;
 				buf[Len++] = FRAME_TYPE_SEND;
 				buf[Len++] = canRxMsg.data[0];
-				crc = calculateCRC16(buf, Len);
+				crc = crc16(buf, Len);
 				memcpy(&buf[Len], &crc, sizeof(uint16_t));
 				Len += sizeof(uint16_t);
 
@@ -60,7 +60,7 @@ void canCommReceivedFrameParsing(void)
 				buf[Len++] = FRAME_TYPE_SEND;
 				memcpy(&buf[Len], &canRxMsg.data[0], 2);
 				Len += 2;
-				crc = calculateCRC16(buf, Len);
+				crc = crc16(buf, Len);
 				memcpy(&buf[Len], &crc, sizeof(uint16_t));
 				Len += sizeof(uint16_t);
 
@@ -87,7 +87,6 @@ void canCommReceivedFrameParsing(void)
 void canCommSendSystemInfo(void)
 {
 	CAN_MessageTypeDef canTxMsg;
-    float inVal, outVal;
 
 	if (dcWorkStatusShowFlag == TRUE)
 	{
@@ -97,16 +96,8 @@ void canCommSendSystemInfo(void)
 		canTxMsg.frameId   = 0X123;
 		canTxMsg.dLc       = 1;
 		canTxMsg.data[0]   = (uint8_t)getFrontBoostTemperature();
+
 		writeCanTxMessageBuffer(&canTxMsg); 
-        
-        inVal = getInputVoltageValue();
-        outVal = getOutputVoltageValue();
-        
-        canTxMsg.frameId   = 0X250;
-        memcpy(&canTxMsg.data[0], &inVal, sizeof(float));
-        memcpy(&canTxMsg.data[4], &outVal, sizeof(float));
-        canTxMsg.dLc = 8;
-        writeCanTxMessageBuffer(&canTxMsg);
 	}
 }
 

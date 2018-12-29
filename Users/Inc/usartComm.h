@@ -9,7 +9,16 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
    
-#define  DATABUF_MAX_SIZE   (15)
+#define  DATABUF_MAX_SIZE   (30)
+   
+#define  SEND_INPUTVOLT_CMD		(0x10)
+#define  SEND_OUTPUTVOLT_CMD	(0x11)
+#define  SEND_TEMPERATURE_CMD	(0x12)
+#define  START_STOP_MACHINE_CMD	(0x13)
+#define  REGULATE_VOLT_CMD      (0x14)
+
+#define  FRAME_TYPE_SEND		(0x00)
+#define  FRAME_TYPE_RESPOND		(0xFF)
    
 typedef struct
 {
@@ -20,9 +29,14 @@ typedef struct
 }uartCommDataStruct_t;
    
 
+int8_t getFrontBoostTemperature(void);
+float getInputVoltageValue(void);
+float getOutputVoltageValue(void);
+
 int usartCommParaDataUpdate(uint8_t cmd, uint8_t* pWdata, uint8_t size);
 void usartCommTimeoutCallback(void);
 void usartCommSendCtrlInfo(void);
+void usartCommReceivedFrameParsing(void);
 
 #ifdef __cplusplus
 }

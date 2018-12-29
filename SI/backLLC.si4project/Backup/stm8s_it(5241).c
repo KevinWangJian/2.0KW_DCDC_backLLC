@@ -359,17 +359,17 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
     {
         TIM2_ClearITPendingBit(TIM2_IT_UPDATE);
 
-//		if (canTransmitSem_Mutex == 0)
-//		{
-        if (readCanTxMessageBuffer(&txMsg) == 0)
-        {
-            canSendMessage_LL(&txMsg);               /* 调用CAN发送底层驱动函数,启动发送. */
-			
-            canTransmitSem_Mutex = 0xff;             /* CAN报文发送互斥信号量置位,与CAN发送中断建立互锁机制,防止当前报文还未发送完毕又再次进入该部分程序启动发送. */
-            
-            CAN_ITConfig(CAN_IT_TME, ENABLE);        /* 打开CAN发送邮箱空中断, 等待发送完成. */
-        }
-//		}
+		if (canTransmitSem_Mutex == 0)
+		{
+	        if (readCanTxMessageBuffer(&txMsg) == 0)
+	        {
+	            canSendMessage_LL(&txMsg);               /* 调用CAN发送底层驱动函数,启动发送. */
+				
+	            canTransmitSem_Mutex = 0xff;             /* CAN报文发送互斥信号量置位,与CAN发送中断建立互锁机制,防止当前报文还未发送完毕又再次进入该部分程序启动发送. */
+	            
+	            CAN_ITConfig(CAN_IT_TME, ENABLE);        /* 打开CAN发送邮箱空中断, 等待发送完成. */
+	        }
+		}
 
 		systemWorkStatusShowCallback();
     }

@@ -2,8 +2,8 @@
 #include "tim1PwmCtrl.h"
 
 
-static float voltageDutyCycle = 93.0;
-static float currentDutyCycle = 93.0;
+static float voltageDutyCycle = 0.0;
+static float currentDutyCycle = 0.0;
 
 
 /**
@@ -16,6 +16,9 @@ void timer1PwmControlInit_LL(void)
 {
     uint16_t voltageChannel_CCR;
     uint16_t currentChannel_CCR;
+    
+    voltageDutyCycle = 83.3;
+    currentDutyCycle = 83.3;
     
     voltageChannel_CCR = (uint16_t)(voltageDutyCycle * 10.0);
     currentChannel_CCR = (uint16_t)(currentDutyCycle * 10.0);
@@ -41,7 +44,7 @@ void timer1PwmControlInit_LL(void)
     /*TIM1 Frequency = TIM1 counter clock/(ARR + 1) */
     TIM1_TimeBaseInit(15, 
                       TIM1_COUNTERMODE_UP,
-                      990,
+                      999,
                       0);                                           /* TIM1 Frequency=16M/16/(999+1)=1KHz */
     
     TIM1_ARRPreloadConfig(DISABLE);                                 /* 不使能自动重装载,影子寄存器的值在写入ARR寄存器时立马更新 */

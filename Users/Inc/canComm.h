@@ -10,6 +10,9 @@
 #include "main.h"
    
 void canCommReceivedFrameParsing(void);
+void canCommSendSystemInfo(void);
+void systemWorkStatusShowCallback(void);
+
 
 #ifdef __cplusplus
 }

@@ -110,7 +110,7 @@ void usartCommSendCtrlInfo(void)
     uint8_t esBuf[15], esLen;
     int8_t usartCommStatus;
     const int8_t SUCESS = 0;
-    const uint8_t MAX_COUNT = 5;
+    const uint8_t MAX_COUNT = 3;
     static uint8_t errCount = 0;
     uint16_t sysSta;
     
@@ -121,7 +121,7 @@ void usartCommSendCtrlInfo(void)
         alwaysRetryFlag   = 0;
         retryAgainFlag    = 0;
         keepingRetryTimes = 0;
-        maxRetryTimes     = 5;                                                          /* 没收到应答信号情况下重发5次; -1, 没收到应答信号一直重发; */
+        maxRetryTimes     = 3;                                                          /* 没收到应答信号情况下重发3次; -1, 没收到应答信号一直重发; */
         retryDelayTime    = 20;                                                         /* 每次发送数据后最大等待超时时间20ms. */
         
         usartCommSendData(uartCommDataPara.data, uartCommDataPara.dLen);
@@ -198,28 +198,24 @@ void usartCommSendCtrlInfo(void)
               sysSta &= ~(1 << UsartComm_TimeOut_Error);
               sysSta &= ~(1 << UsartComm_Data_Error);
               configSystemWorkingStatus(sysSta);
-
-			  uartCommDataPara.update = 0;
             } break;                                                                    
             
             case 1: {                                                                   /* 通信错误. */
               sysSta  = getSystemWorkingStatus();
               sysSta |= (1 << UsartComm_Data_Error);
               configSystemWorkingStatus(sysSta);
-
-			  uartCommDataPara.update = 0;
             } break;                                                                    
             
             case 2: {                                                                   /* 通信超时. */
               sysSta  = getSystemWorkingStatus();
               sysSta |= (1 << UsartComm_TimeOut_Error);
               configSystemWorkingStatus(sysSta);
-
-			  uartCommDataPara.update = 0;
             } break;                                                                    
             
             default: break;
         }
+
+		uartCommDataPara.update = 0;
     }
 }
 

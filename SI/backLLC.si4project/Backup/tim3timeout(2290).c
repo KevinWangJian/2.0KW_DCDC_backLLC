@@ -6,7 +6,7 @@ static uint8_t timeoutTimer3Status = 0;
 
 
 /*
- * @函数功能：TIM3超时定时器初始化,用于数据通信超时判断.(定时周期T = 1ms,该超时定时器初始化后并未立刻使能.)
+ * @函数功能：TIM3超时定时器初始化,用于数据通信超时判断.
  * @函数参数：无
  * @返回值：无
  */
@@ -15,7 +15,7 @@ void tim3TimeoutFuncConfig_LL(void)
     CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER3, ENABLE);
     
     TIM3_DeInit();
-    TIM3_TimeBaseInit(TIM3_PRESCALER_128, (125 - 1));
+    TIM3_TimeBaseInit(TIM3_PRESCALER_128, 125);
     TIM3_ARRPreloadConfig(DISABLE); 
     TIM3_UpdateDisableConfig(DISABLE); 
     TIM3_UpdateRequestConfig(TIM3_UPDATESOURCE_REGULAR);    

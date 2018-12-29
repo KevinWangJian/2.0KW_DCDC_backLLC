@@ -50,7 +50,7 @@ void ledLightToggle_LL(void)
  */
 void ledLightDisplay(void)
 {
-    const uint16_t TIMEOUT = 500;
+    const uint16_t TIMEOUT = 350;
     static uint16_t cnt = 0;
     uint16_t sta;
     
